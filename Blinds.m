@@ -1,7 +1,8 @@
 //
 //  Blinds.m
-//  AccordianView
 //
+//  Blinds is created by Abelardo Marquez @ajmarquez
+//  this library is based on AccodianView by AnubhabRay
 //
 
 #import "Blinds.h"

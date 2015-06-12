@@ -1,8 +1,9 @@
 //
 //  Blinds.h
-//  AccordianView
 //
-
+//  Blinds is created by Abelardo Marquez @ajmarquez
+//  This library is based on AccodianView by AnubhabRay
+//
 
 #import <UIKit/UIKit.h>
 
