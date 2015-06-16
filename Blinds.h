@@ -11,7 +11,11 @@
 @interface Blinds : UIViewController
 
 @property (nonatomic, copy) NSMutableArray* headerArray;    //Array tha contains the set of Header texts
-@property (nonatomic, copy) NSMutableArray* contentArray;   //Array that contains the set of content texts
+@property (nonatomic, copy) NSMutableArray* contentArray;
+
+@property (strong, nonatomic) UIScrollView *scrollViewForAccordian;
+
+//Array that contains the set of content texts
 
 //View properties
 @property (nonatomic, assign) NSInteger globalWidth;    //Sets the width of the header and other cells
@@ -29,7 +33,10 @@
 -(void)setFontSizesForHeader:(NSInteger)headerSize andContent:(NSInteger)contentSize;
 
 //Main Method
--(void)createAccordion;
+-(void)createBlinds;
+
+//Main method that creates accordion using the parse Class
+-(void)CreateBlindWithJson:(NSString*)json;
 
 
 

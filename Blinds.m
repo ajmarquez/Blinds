@@ -7,10 +7,12 @@
 
 #import "Blinds.h"
 #import <QuartzCore/QuartzCore.h>
+#import "Parser.h"
 
 #define Yvalueinitial 0
 @interface Blinds ()
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollViewForAccordian;
+
+//We should clean a little bit this code
 
 @property (nonatomic) BOOL isExpanded;
 @property (nonatomic) NSUInteger tagOfViewExpanded;
@@ -32,51 +34,10 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    headerArray = [[NSMutableArray alloc] init];
+    [self CreateBlindWithJson:@"hexomedine"];
     
-    [headerArray addObject:@"Darth Vader"];
-    [headerArray addObject:@"The Kingpin"];
-    [headerArray addObject:@"The Joker"];
-    [headerArray addObject:@"Ra's Al ghul"];
-    [headerArray addObject:@"Darth Vader"];
-    [headerArray addObject:@"The Kingpin"];
-    [headerArray addObject:@"The Joker"];
-    [headerArray addObject:@"Ra's Al ghul"];
-    [headerArray addObject:@"Darth Vader"];
-    [headerArray addObject:@"The Kingpin"];
-    [headerArray addObject:@"The Joker"];
-    [headerArray addObject:@"Ra's Al ghul"];
-    [headerArray addObject:@"Darth Vader"];
-    [headerArray addObject:@"The Kingpin"];
-    [headerArray addObject:@"The Joker"];
-    [headerArray addObject:@"Ra's Al ghul"];
     
-     contentArray = [[NSMutableArray alloc] init];
-    
-    [contentArray addObject:@"The force is stronger in this one"];
-    [contentArray addObject:@"One must choose between being evil or good. One can't be savior and evil at the same time. This is just a test paragrahp but the Kingpin will always be alive and always be trying to make things better for this city"];
-    [contentArray addObject:@"In more like a dog chasing a wheel. If you are good at something never do it for free"];
-    [contentArray addObject:@"The league of shadows seeks for true justice. You're father was too weak. He tried to save the city. You must eliminate the corrupt in order to bring peace"];
-    [contentArray addObject:@"The force is stronger in this one"];
-    [contentArray addObject:@"One must choose between being evil or good. One can't be savior and evil at the same time. This is just a test paragrahp but the Kingpin will always be alive and always be trying to make things better for this city"];
-    [contentArray addObject:@"In more like a dog chasing a wheel. If you are good at something never do it for free"];
-    [contentArray addObject:@"The league of shadows seeks for true justice. You're father was too weak. He tried to save the city. You must eliminate the corrupt in order to bring peace"];
-    [contentArray addObject:@"The force is stronger in this one"];
-    [contentArray addObject:@"One must choose between being evil or good. One can't be savior and evil at the same time. This is just a test paragrahp but the Kingpin will always be alive and always be trying to make things better for this city"];
-    [contentArray addObject:@"In more like a dog chasing a wheel. If you are good at something never do it for free"];
-    [contentArray addObject:@"The league of shadows seeks for true justice. You're father was too weak. He tried to save the city. You must eliminate the corrupt in order to bring peace"];
-    [contentArray addObject:@"The force is stronger in this one"];
-    [contentArray addObject:@"One must choose between being evil or good. One can't be savior and evil at the same time. This is just a test paragrahp but the Kingpin will always be alive and always be trying to make things better for this city"];
-    [contentArray addObject:@"In more like a dog chasing a wheel. If you are good at something never do it for free"];
-    [contentArray addObject:@"The league of shadows seeks for true justice. You're father was too weak. He tried to save the city. You must eliminate the corrupt in order to bring peace"];
-    
-    [self settingDifferentDevices];
-    
-    [self initWithWidth:320];
-    [self setFontSizesForHeader:20 andContent:18];
-    
-    [self createAccordion];
-}
+    }
 
 - (void)didReceiveMemoryWarning
 {
@@ -129,7 +90,7 @@
  Main Methods to create the accordion
  **/
 
--(void)createAccordion
+-(void)createBlinds
 {
     int yValue=Yvalueinitial;
     for (UIView *views in scrollViewForAccordian.subviews)
@@ -345,6 +306,38 @@
             }
         }
     }
+}
+
+#pragma Integrator Function
+
+-(void)CreateBlindWithJson:(NSString*)json {
+    
+    headerArray = [[NSMutableArray alloc] init];
+    
+    contentArray = [[NSMutableArray alloc] init];
+    
+    
+    scrollViewForAccordian = [[UIScrollView alloc] init];
+    scrollViewForAccordian.frame = CGRectMake(0, 65, self.view.bounds.size.width, self.view.bounds.size.height);
+    scrollViewForAccordian.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:scrollViewForAccordian];
+    [self settingDifferentDevices];
+    Parser* parseInfo = [[Parser alloc] init];
+    
+    [parseInfo createArraysUsing:json];
+    //[parseInfo getJSONDataFromFile:json];
+    [self initWithHeaderArray:parseInfo.headerTextArray ContentArray:parseInfo.contentTextArray];
+    NSLog(@"Header info: %lu",(unsigned long)parseInfo.headerTextArray.count);
+    NSLog(@"Content info: %lu",(unsigned long)parseInfo.contentTextArray.count);
+    
+    
+    [self initWithWidth:self.view.bounds.size.width];
+    [self setFontSizesForHeader:20 andContent:18];
+    [self createAccordion];
+
+    
+    
+    
 }
 
 
