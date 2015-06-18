@@ -333,7 +333,7 @@
     
     [self initWithWidth:self.view.bounds.size.width];
     [self setFontSizesForHeader:20 andContent:18];
-    [self createAccordion];
+    [self createBlinds];
 
     
     
